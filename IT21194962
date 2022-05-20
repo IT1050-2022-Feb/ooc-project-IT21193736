@@ -1,0 +1,130 @@
+//IT21194962
+//User.h
+
+#include<string>
+using namespace std;
+
+
+class User
+{
+protected:
+	string Name;
+	string contactNo;
+
+public:
+	User();
+	User(string pName, string pcontactNo);
+	~User();
+
+};
+
+
+
+//RegisteredUser.h
+
+#include "User.h"
+#include<string>
+#define size 2
+using namespace std;
+
+class RegisteredUser:public User
+{
+protected:
+	string UserId;
+	string Address;
+	string NIC;
+	order* ord[size];
+
+public:
+	RegisteredUser();
+	RegisteredUser(string pname, string pcontact, string puserid, string paddress, string pnic);
+	
+	void login();
+	void viewItem();
+	~RegisteredUser();
+
+
+};
+
+
+//UnregisteredUser
+
+#include "User.h"
+
+class UnregisteredUser:public User
+{
+private:
+public:
+	UnregisteredUser();
+	UnregisteredUser(string pname, string pcontactNO);
+	void Register();
+	void viewItem();
+	~UnregisteredUser();
+	
+};
+
+
+
+
+//User.cpp
+
+#include "User.h"
+
+
+User::User() {
+	Name="";
+	contactNo = "";
+}
+User::User(string pName, string pcontactNo) {
+	Name = pName;
+	contactNo = pcontactNo;
+}
+User::~User(){
+}; 
+
+
+
+
+//RegisteredUser.cpp
+
+#include"RegisteredUser.h"
+#include "User.h"
+
+
+RegisteredUser::RegisteredUser() {
+	
+	UserId ="";
+	Address = "";
+	NIC = "";
+};
+RegisteredUser::RegisteredUser(string pname, string pcontact, string puserid, string paddress, string pnic)
+	:User(pname, pcontact) {
+
+	UserId = puserid;
+	Address = paddress;
+	NIC=pnic;
+	 
+
+};
+
+void RegisteredUser::login() {};
+void RegisteredUser::viewItem() {};
+RegisteredUser::~RegisteredUser() {};
+
+
+
+
+//UnregisteredUser.cpp
+
+#include "UnregisteredUser.h"
+#include"User.h"
+
+UnregisteredUser::UnregisteredUser(){};
+
+UnregisteredUser::UnregisteredUser(string pname,string pcontactNO):User(pname,pcontactNO) {};
+
+void UnregisteredUser::Register() {};
+
+void UnregisteredUser::viewItem() {};
+
+UnregisteredUser::~UnregisteredUser(){};

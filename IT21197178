@@ -1,0 +1,85 @@
+//IT21197178
+//item.h
+
+#include<string>
+using namespace std;
+
+
+class item
+{
+private:
+	string Itemname;
+	string ItemId;
+	float Price;
+	order* ord;
+
+public:
+	item();
+	item(string pitemname, string pitemid, float pprice);
+	void RemoveItems();
+	void SearchItems();
+	~item();
+
+};
+
+
+//shoppingCart.h
+
+#include"item.h"
+#include<string>
+using namespace std;
+#define size 2
+
+class shoppingCart
+{
+private:
+	string userid;
+	string ItemId;
+	item* itm[size];
+
+public:
+	shoppingCart();
+	shoppingCart(string puserid, string pItemId);
+	void addToCart();
+	~shoppingCart();
+};
+
+
+
+//item.cpp
+
+#include "item.h"
+
+item::item() {
+	Itemname="";
+	ItemId="";
+	Price = 0.0;
+};
+item::item(string pitemname, string pitemid, float pprice) {
+	Itemname = pitemname;
+	ItemId = pitemid;
+	Price = pprice;
+};
+void item::RemoveItems(){};
+void item::SearchItems(){};
+item::~item() {};
+
+
+
+//shoppingCart.cpp
+
+#include "shoppingCart.h"
+shoppingCart::shoppingCart() {
+	userid = "";
+	ItemId = "";
+};
+shoppingCart::shoppingCart(string puserid, string pItemId) {
+	userid = puserid;
+	ItemId = pItemId;
+};
+void shoppingCart::addToCart(){};
+shoppingCart::~shoppingCart(){}; 
+
+
+
+

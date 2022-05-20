@@ -1,0 +1,483 @@
+//deliveryInfo.h
+
+#include<string>
+
+using namespace std;
+
+
+class deliveryInfo
+{
+private:
+	string deliveryId;
+	string orderId;
+	string UserId;
+	string deliverdate;
+
+public:
+	deliveryInfo();
+	deliveryInfo(string pdid,string porderid, string puserid, string pdate);
+	void addTrackDetail();
+	~deliveryInfo();
+
+};
+
+
+//item.h
+
+#include<string>
+using namespace std;
+
+
+class item
+{
+private:
+	string Itemname;
+	string ItemId;
+	float Price;
+	order* ord;
+
+public:
+	item();
+	item(string pitemname, string pitemid, float pprice);
+	void RemoveItems();
+	void SearchItems();
+	~item();
+
+};
+
+ 
+//Order.h
+
+#include"RegisteredUser.h"
+#include"Pharmacist.h"
+#include"report.h"
+#include"payment.h"
+#include"item.h"
+#include"deliveryInfo.h"
+class order
+{
+private:
+	string OrderId;
+	string UserId;
+	string ItemId;
+	RegisteredUser* Ruser;
+	Pharmacist* phuser;
+	item* itm1;
+	report* report1;
+	deliveryInfo* dinfo;
+	payment* pay;
+	
+
+public:
+	order();
+	order(string porderid, string puserid, string pitemid);
+	void addDinfo();
+	void addPinfo();
+	void confirmOrder();
+	void cancelOrder();
+	~order();
+
+};
+
+
+//Payment.h
+
+#include<string>
+#include"report.h"
+#include"Pharmacist.h"
+using namespace std;
+
+class payment
+{
+private:
+	
+	string  InvoiceNumber;
+	string cardNo;
+	float total;
+	Pharmacist* phr1;
+	report* report1;
+
+public:
+	payment();
+	payment(string pInvoiceNumber,string pcardNo, float ptotal);
+	void addpaymentMethod();
+	float checkout();
+	~payment();
+
+};
+
+//Pharmacist.h
+
+#include"RegisteredUser.h"
+#define size1 2
+#define size2 2
+
+
+class Pharmacist:public RegisteredUser
+{
+private:
+	payment* pay[size1];
+	order* orde[size2];
+public:
+	Pharmacist();
+	Pharmacist(string pname, string pcontact, string puserid, string paddress, string pnic);
+	void checkOrders();
+	void checkPayment();
+	~Pharmacist();
+
+};
+
+//RegisteredUser.h
+
+#include "User.h"
+#include<string>
+#define size 2
+using namespace std;
+
+class RegisteredUser:public User
+{
+protected:
+	string UserId;
+	string Address;
+	string NIC;
+	order* ord[size];
+
+public:
+	RegisteredUser();
+	RegisteredUser(string pname, string pcontact, string puserid, string paddress, string pnic);
+	
+	void login();
+	void viewItem();
+	~RegisteredUser();
+
+
+};
+
+//Report.h
+
+#include<string>
+using namespace std;
+
+class report
+{
+private:
+	string reportId;
+
+public:
+	report();
+	report(string preportid);
+	void viewPayment();
+	void viewOrders();
+	~report();
+
+};
+
+//shoppingCart.h
+
+#include"item.h"
+#include<string>
+using namespace std;
+#define size 2
+
+class shoppingCart
+{
+private:
+	string userid;
+	string ItemId;
+	item* itm[size];
+
+public:
+	shoppingCart();
+	shoppingCart(string puserid, string pItemId);
+	void addToCart();
+	~shoppingCart();
+};
+
+
+ 
+//UnregisteredUser
+
+#include "User.h"
+
+class UnregisteredUser:public User
+{
+private:
+public:
+	UnregisteredUser();
+	UnregisteredUser(string pname, string pcontactNO);
+	void Register();
+	void viewItem();
+	~UnregisteredUser();
+	
+};
+
+//User.h
+
+#include<string>
+using namespace std;
+
+
+class User
+{
+protected:
+	string Name;
+	string contactNo;
+
+public:
+	User();
+	User(string pName, string pcontactNo);
+	~User();
+
+};
+ 
+//deliveryInfo.cpp
+
+#include "deliveryInfo.h"
+
+deliveryInfo::deliveryInfo() {
+	deliveryId = "";
+	orderId = "";
+	UserId = "";
+	deliverdate = "";
+};
+deliveryInfo::deliveryInfo(string pdid, string porderid, string puserid, string pdate) {
+	deliveryId = pdid;
+	orderId = porderid;
+	UserId = puserid;
+	deliverdate = pdate;
+};
+void deliveryInfo::addTrackDetail(){};
+deliveryInfo::~deliveryInfo(){};
+
+
+//item.cpp
+
+#include "item.h"
+
+item::item() {
+	Itemname="";
+	ItemId="";
+	Price = 0.0;
+};
+item::item(string pitemname, string pitemid, float pprice) {
+	Itemname = pitemname;
+	ItemId = pitemid;
+	Price = pprice;
+};
+void item::RemoveItems(){};
+void item::SearchItems(){};
+item::~item() {}; 
+
+//order.cpp
+
+#include "order.h"
+
+order::order() {
+	OrderId="";
+	UserId="";
+	ItemId = "";
+}
+order::order(string porderid, string puserid, string pitemid) {
+	OrderId = porderid;
+	UserId = puserid;
+	ItemId = pitemid;
+
+
+	
+	
+
+}
+void order::addDinfo() {
+	dinfo = new deliveryInfo();
+};
+void order::addPinfo() {
+	pay = new payment();
+};
+void order::confirmOrder(){};
+void order::cancelOrder(){};
+order::~order(){}; 
+
+//payment.cpp
+
+#include "payment.h"
+
+payment::payment() {
+	InvoiceNumber="";
+	cardNo="";
+	float total = 0.0;
+};
+payment::payment(string pInvoiceNumber,string pcardNo, float ptotal) {
+	InvoiceNumber = pInvoiceNumber;
+	cardNo = pcardNo;
+	float total = ptotal;
+};
+void payment::addpaymentMethod(){};
+float payment::checkout(){};
+payment::~payment(){}; 
+
+//pharmacist.cpp
+
+#include "Pharmacist.h"
+
+Pharmacist::Pharmacist() {
+
+};
+
+Pharmacist::Pharmacist(string pname, string pcontact, string puserid, string paddress, string pnic):RegisteredUser(pname, pcontact, puserid, paddress, pnic) {
+
+};
+void Pharmacist::checkOrders(){};
+void Pharmacist::checkPayment(){};
+Pharmacist::~Pharmacist(){}; 
+
+//RegisteredUser.cpp
+
+#include"RegisteredUser.h"
+#include "User.h"
+
+
+RegisteredUser::RegisteredUser() {
+	
+	UserId ="";
+	Address = "";
+	NIC = "";
+};
+RegisteredUser::RegisteredUser(string pname, string pcontact, string puserid, string paddress, string pnic)
+	:User(pname, pcontact) {
+
+	UserId = puserid;
+	Address = paddress;
+	NIC=pnic;
+	 
+
+};
+
+void RegisteredUser::login() {};
+void RegisteredUser::viewItem() {};
+RegisteredUser::~RegisteredUser() {};
+
+
+//report.cpp
+
+#include "report.h"
+
+report::report() {
+	reportId = "";
+
+};
+report::report(string preportid) {
+	reportId = preportid;
+};
+void report::viewPayment(){};
+void report::viewOrders(){};
+report::~report(){}; 
+
+//shoppingCart.cpp
+
+#include "shoppingCart.h"
+shoppingCart::shoppingCart() {
+	userid = "";
+	ItemId = "";
+};
+shoppingCart::shoppingCart(string puserid, string pItemId) {
+	userid = puserid;
+	ItemId = pItemId;
+};
+void shoppingCart::addToCart(){};
+shoppingCart::~shoppingCart(){}; 
+
+//UnregisteredUser.cpp
+
+#include "UnregisteredUser.h"
+#include"User.h"
+
+UnregisteredUser::UnregisteredUser(){};
+
+UnregisteredUser::UnregisteredUser(string pname,string pcontactNO):User(pname,pcontactNO) {};
+
+void UnregisteredUser::Register() {};
+
+void UnregisteredUser::viewItem() {};
+
+UnregisteredUser::~UnregisteredUser(){};
+
+
+//User.cpp
+
+#include "User.h"
+
+
+User::User() {
+	Name="";
+	contactNo = "";
+}
+User::User(string pName, string pcontactNo) {
+	Name = pName;
+	contactNo = pcontactNo;
+}
+User::~User(){
+};  
+//Main.cpp
+
+#include<iomanip>
+#include<string>
+
+#include"User.h"
+#include"RegisteredUser.h"
+#include"UnregisteredUser.h"
+#include"item.h"
+#include"order.h"
+#include"deliveryInfo.h"
+#include"payment.h"
+#include"Pharmacist.h"
+#include"report.h"
+#include"shoppingCart.h"
+using namespace std;
+
+int main() {
+
+	User* user1;
+	user1 = new User("sarath","0712756567");
+
+	RegisteredUser* Ruser1;
+	Ruser1 = new RegisteredUser("sachintha","0712727275", "IT21194962", "negombo", "2001010101010");
+
+	UnregisteredUser* unuser1;
+	unuser1 = new UnregisteredUser("samarasekara", "0712000000");
+
+	Pharmacist* phr1;
+	phr1 = new Pharmacist("themiya", "0712300000", "it2121", "malabe", "121212");
+
+	order* ord1;
+	ord1 = new order("111", "it2121", "psw12");
+
+	item* itm1;
+	itm1 = new item("penadol", "as1212", 125.00);
+
+	deliveryInfo* deliver1;
+	deliver1 = new deliveryInfo("222", "1212", "it1212", "2022/05/20");
+
+	payment* pay1;
+	pay1 = new payment("12122", "8989121234560967", 12345.00);
+
+	report* rpt1;
+	rpt1 = new report("R1233");
+
+	shoppingCart* spcart1;
+	spcart1 = new shoppingCart("it21194962", "5555");
+
+
+	delete user1;
+	delete Ruser1;
+	delete unuser1;
+	delete phr1;
+	delete ord1;
+	delete itm1;
+	delete deliver1;
+	delete pay1;
+	delete rpt1;
+	delete spcart1;
+
+
+	return 0;
+}

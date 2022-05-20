@@ -1,0 +1,93 @@
+//IT21193736
+//deliveryInfo.h
+
+#include<string>
+
+using namespace std;
+
+
+class deliveryInfo
+{
+private:
+	string deliveryId;
+	string orderId;
+	string UserId;
+	string deliverdate;
+
+public:
+	deliveryInfo();
+	deliveryInfo(string pdid,string porderid, string puserid, string pdate);
+	void addTrackDetail();
+	~deliveryInfo();
+
+};
+
+
+//Payment.h
+
+#include<string>
+#include"report.h"
+#include"Pharmacist.h"
+using namespace std;
+
+class payment
+{
+private:
+	
+	string  InvoiceNumber;
+	string cardNo;
+	float total;
+	Pharmacist* phr1;
+	report* report1;
+
+public:
+	payment();
+	payment(string pInvoiceNumber,string pcardNo, float ptotal);
+	void addpaymentMethod();
+	float checkout();
+	~payment();
+
+};
+
+
+
+//deliveryInfo.cpp
+
+
+
+#include "deliveryInfo.h"
+
+deliveryInfo::deliveryInfo() {
+	deliveryId = "";
+	orderId = "";
+	UserId = "";
+	deliverdate = "";
+};
+deliveryInfo::deliveryInfo(string pdid, string porderid, string puserid, string pdate) {
+	deliveryId = pdid;
+	orderId = porderid;
+	UserId = puserid;
+	deliverdate = pdate;
+};
+void deliveryInfo::addTrackDetail(){};
+deliveryInfo::~deliveryInfo(){};
+
+
+//payment.cpp
+
+
+#include "payment.h"
+
+payment::payment() {
+	InvoiceNumber="";
+	cardNo="";
+	float total = 0.0;
+};
+payment::payment(string pInvoiceNumber,string pcardNo, float ptotal) {
+	InvoiceNumber = pInvoiceNumber;
+	cardNo = pcardNo;
+	float total = ptotal;
+};
+void payment::addpaymentMethod(){};
+float payment::checkout(){};
+payment::~payment(){}; 

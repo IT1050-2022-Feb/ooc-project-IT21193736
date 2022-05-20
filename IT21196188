@@ -1,0 +1,103 @@
+//IT21196188
+//Pharmacist.h
+
+#include"RegisteredUser.h"
+#define size1 2
+#define size2 2
+
+
+class Pharmacist:public RegisteredUser
+{
+private:
+	payment* pay[size1];
+	order* orde[size2];
+public:
+	Pharmacist();
+	Pharmacist(string pname, string pcontact, string puserid, string paddress, string pnic);
+	void checkOrders();
+	void checkPayment();
+	~Pharmacist();
+
+};
+
+//Order.h
+
+#include"RegisteredUser.h"
+#include"Pharmacist.h"
+#include"report.h"
+#include"payment.h"
+#include"item.h"
+#include"deliveryInfo.h"
+class order
+{
+private:
+	string OrderId;
+	string UserId;
+	string ItemId;
+	RegisteredUser* Ruser;
+	Pharmacist* phuser;
+	item* itm1;
+	report* report1;
+	deliveryInfo* dinfo;
+	payment* pay;
+	
+
+public:
+	order();
+	order(string porderid, string puserid, string pitemid);
+	void addDinfo();
+	void addPinfo();
+	void confirmOrder();
+	void cancelOrder();
+	~order();
+
+};
+
+
+
+//pharmacist.cpp
+
+#include "Pharmacist.h"
+
+Pharmacist::Pharmacist() {
+
+};
+
+Pharmacist::Pharmacist(string pname, string pcontact, string puserid, string paddress, string pnic):RegisteredUser(pname, pcontact, puserid, paddress, pnic) {
+
+};
+void Pharmacist::checkOrders(){};
+void Pharmacist::checkPayment(){};
+Pharmacist::~Pharmacist(){}; 
+
+
+
+//order.cpp
+
+#include "order.h"
+
+order::order() {
+	OrderId="";
+	UserId="";
+	ItemId = "";
+}
+order::order(string porderid, string puserid, string pitemid) {
+	OrderId = porderid;
+	UserId = puserid;
+	ItemId = pitemid;
+
+
+	
+	
+
+}
+void order::addDinfo() {
+	dinfo = new deliveryInfo();
+};
+void order::addPinfo() {
+	pay = new payment();
+};
+void order::confirmOrder(){};
+void order::cancelOrder(){};
+order::~order(){}; 
+

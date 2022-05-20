@@ -1,0 +1,100 @@
+//Report.h
+
+#include<string>
+using namespace std;
+
+class report
+{
+private:
+	string reportId;
+
+public:
+	report();
+	report(string preportid);
+	void viewPayment();
+	void viewOrders();
+	~report();
+
+};
+
+//report.cpp
+
+#include "report.h"
+
+report::report() {
+	reportId = "";
+
+};
+report::report(string preportid) {
+	reportId = preportid;
+};
+void report::viewPayment(){};
+void report::viewOrders(){};
+report::~report(){}; 
+
+//Main.cpp
+
+#include<iomanip>
+#include<string>
+
+#include"User.h"
+#include"RegisteredUser.h"
+#include"UnregisteredUser.h"
+#include"item.h"
+#include"order.h"
+#include"deliveryInfo.h"
+#include"payment.h"
+#include"Pharmacist.h"
+#include"report.h"
+#include"shoppingCart.h"
+using namespace std;
+
+int main() {
+
+	User* user1;
+	user1 = new User("sarath","0712756567");
+
+	RegisteredUser* Ruser1;
+	Ruser1 = new RegisteredUser("sachintha","0712727275", "IT21194962", "negombo", "2001010101010");
+
+	UnregisteredUser* unuser1;
+	unuser1 = new UnregisteredUser("samarasekara", "0712000000");
+
+	Pharmacist* phr1;
+	phr1 = new Pharmacist("themiya", "0712300000", "it2121", "malabe", "121212");
+
+	order* ord1;
+	ord1 = new order("111", "it2121", "psw12");
+
+	item* itm1;
+	itm1 = new item("penadol", "as1212", 125.00);
+
+	deliveryInfo* deliver1;
+	deliver1 = new deliveryInfo("222", "1212", "it1212", "2022/05/20");
+
+	payment* pay1;
+	pay1 = new payment("12122", "8989121234560967", 12345.00);
+
+	report* rpt1;
+	rpt1 = new report("R1233");
+
+	shoppingCart* spcart1;
+	spcart1 = new shoppingCart("it21194962", "5555");
+
+
+	delete user1;
+	delete Ruser1;
+	delete unuser1;
+	delete phr1;
+	delete ord1;
+	delete itm1;
+	delete deliver1;
+	delete pay1;
+	delete rpt1;
+	delete spcart1;
+
+
+	return 0;
+}
+
+
